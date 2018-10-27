@@ -1,1 +1,1 @@
-# py-k8s-fitches-redis
+# pi-k8s-fitches-redis
