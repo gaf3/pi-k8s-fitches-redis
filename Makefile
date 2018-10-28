@@ -1,8 +1,10 @@
 IMAGE=pi-k8s-fitches-redis
-VERSION=0.1
+VERSION=0.2
 PORT=6379
 ACCOUNT=gaf3
 NAMESPACE=fitches
+LOCAL=minikube
+PRODUCTION=pi-k8s
 
 pull:
 	docker pull $(ACCOUNT)/$(IMAGE)
@@ -20,10 +22,19 @@ push: build
 	docker push $(ACCOUNT)/$(IMAGE):$(VERSION)
 
 create-local: push
-	kubectl --context=minikube -n $(NAMESPACE) create -f k8s/local.yaml
+	kubectl --context=$(LOCAL) -n $(NAMESPACE) create -f k8s/local.yaml
 
 update-local: push
-	kubectl --context=minikube -n $(NAMESPACE) replace -f k8s/local.yaml
+	kubectl --context=$(LOCAL) -n $(NAMESPACE) replace -f k8s/local.yaml
 
 delete-local:
-	kubectl --context=minikube -n $(NAMESPACE) delete -f k8s/local.yaml
+	kubectl --context=$(LOCAL) -n $(NAMESPACE) delete -f k8s/local.yaml
+
+create: push
+	kubectl --context=$(PRODUCTION) -n $(NAMESPACE) create -f k8s/production.yaml
+
+update: push
+	kubectl --context=$(PRODUCTION) -n $(NAMESPACE) replace -f k8s/production.yaml
+
+delete:
+	kubectl --context=$(PRODUCTION) -n $(NAMESPACE) delete -f k8s/production.yaml
