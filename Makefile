@@ -1,5 +1,5 @@
 IMAGE=pi-k8s-fitches-redis
-VERSION=0.1
+VERSION=0.3
 PORT=6379
 ACCOUNT=gaf3
 NAMESPACE=fitches
