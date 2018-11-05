@@ -5,7 +5,7 @@ ACCOUNT=gaf3
 NAMESPACE=fitches
 
 pull:
-	docker pull $(ACCOUNT)/$(IMAGE)
+	docker pull $(ACCOUNT)/$(IMAGE)login 
 
 build:
 	docker build . -t $(ACCOUNT)/$(IMAGE):$(VERSION)
@@ -19,11 +19,11 @@ run: build
 push: build
 	docker push $(ACCOUNT)/$(IMAGE):$(VERSION)
 
-create-local: push
-	kubectl --context=minikube -n $(NAMESPACE) create -f k8s/local.yaml
+create: push
+	kubectl -n $(NAMESPACE) create -f k8s/pi-k8s.yaml
 
-update-local: push
-	kubectl --context=minikube -n $(NAMESPACE) replace -f k8s/local.yaml
+update: push
+	kubectl -n $(NAMESPACE) replace -f k8s/pi-k8s.yaml
 
-delete-local:
-	kubectl --context=minikube -n $(NAMESPACE) delete -f k8s/local.yaml
+delete:
+	kubectl -n $(NAMESPACE) delete -f k8s/pi-k8s.yaml
