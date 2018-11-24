@@ -55,6 +55,7 @@ JSON object:
 - user - Who's reponsible for the chore
 - node - The node on which the event happened
 - started - Time it started
+- notified - Time last notified (start, complete)
 - completed - Time it completed (non existement if incomplete)
 - tasks - array
   - name - The name of the task
@@ -63,6 +64,48 @@ JSON object:
     - If non existent, no reminder
   - notified - Time last notified (start, reminder, complete)
   - completed - Time it completed (non existement if incomplete)
+
+Example:
+
+```json
+{
+    "name": "get ready for school",
+    "user": "Azalea",
+    "node": "pi-k8s-azalea",
+    "started": 1543074126,
+    "completed": 1543075126,
+    "tasks": [
+        {
+            "name": "get out of bed",
+            "interval": 15,
+            "started": 1543074126,
+            "notified": 1543074226,
+            "completed": 1543074226
+        },
+        {
+            "name": "get dressed",
+            "interval": 60,
+            "started": 1543074326,
+            "notified": 1543074426,
+            "completed": 1543074526
+        },
+        {
+            "name": "brush your teeth",
+            "interval": 60,
+            "started": 1543074526,
+            "notified": 1543074626,
+            "completed": 1543074726
+        },
+        {
+            "name": "pur on your boots, coat, and hat",
+            "interval": 60,
+            "started": 1543074826,
+            "notified": 1543074926,
+            "completed": 1543075126
+        }
+    ]
+}
+```
 
 We'll probably need a library for interacting with the redis object. 
 
