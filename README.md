@@ -107,6 +107,24 @@ Example:
 }
 ```
 
+Chores and tasks are phrased this way to work with the text to speech.  When the chore starts it'll say `"{name}, time to {chore}"`.
+
+Then for each task, it'll say `"{name}, please {task}"` until done and then say `"{name}, you did {task} in {minutes} minute(s), {seconds} second(s)"`
+
+Then in the end it'll day `"{name}, thank you. You did {chore} in {minutes} minuites and {seconds} seconds"`.
+
+For the about example, this is what's said:
+- "Azelea, time to get ready for school" once
+- "Azelea, please get out of bed" every 15 seconds 
+- "Azalea, you did get out of bed in 1 minute, 40 seconds" once
+- "Azelea, please get dressed" every 60 seconds 
+- "Azalea, you did get dressed in 3 minutes, 20 seconds" once
+- "Azelea, please brush your teeth" every 60 seconds 
+- "Azalea, you did brush your teethin 3 minutes, 20 seconds" once
+- "Azelea, please put on your boots, coat, and hat" every 60 seconds 
+- "Azalea, you did put on your boots, coat, and hat in 3 minutes, 20 seconds" once
+- "Azalea, thank you. You did get ready for school in 16 minutes, 40 seconds" once
+
 We'll probably need a library for interacting with the redis object. Basically as a task is completed, the next must be started until the last task is completed, then everything's done.
 
 We could go through the API which would make the code simpler, but we'd introduce a lot of risk.
