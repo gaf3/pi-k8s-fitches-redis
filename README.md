@@ -54,6 +54,7 @@ JSON object:
 - chore - The name of the chore
 - name - Who's reponsible for the chore
 - node - The node on which the event happened
+- language - The language to use
 - started - Time it started
 - notified - Time last notified (start, complete)
 - completed - Time it completed (non existement if incomplete)
@@ -72,6 +73,7 @@ Example:
     "chore": "get ready for school",
     "name": "Azalea",
     "node": "pi-k8s-azalea",
+    "language": "en",
     "started": 1543074126,
     "completed": 1543075126,
     "tasks": [
