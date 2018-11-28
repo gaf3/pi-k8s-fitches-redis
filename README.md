@@ -51,15 +51,18 @@ Example:
 path: `/node/<node>/chore` Only one chore per node right now
 
 JSON object:
-- chore - The name of the chore
-- name - Who's reponsible for the chore
+- id - The id to access the chore (same as node for now)
+- label - The label used to identify the chore
+- text - The text of the chore
+- person - Who's reponsible for the chore
 - node - The node on which the event happened
 - language - The language to use
 - started - Time it started
 - notified - Time last notified (start, complete)
 - completed - Time it completed (non existement if incomplete)
 - tasks - array
-  - task - The name of the task
+  - id - The id to access the task (index for now)
+  - text - The text of the task
   - interval - Interval in sends to remind
   - started - Time started
     - If non existent, no reminder
@@ -70,36 +73,42 @@ Example:
 
 ```json
 {
-    "chore": "get ready for school",
-    "name": "Azalea",
+    "id": "pi-k8s-azalea",
+    "label": "Before care, Azi",
+    "text": "get ready for school",
+    "person": "Azalea",
     "node": "pi-k8s-azalea",
     "language": "en",
     "started": 1543074126,
     "completed": 1543075126,
     "tasks": [
         {
-            "task": "get out of bed",
+            "id": 0,
+            "text": "get out of bed",
             "interval": 15,
             "started": 1543074126,
             "notified": 1543074226,
             "completed": 1543074226
         },
         {
-            "task": "get dressed",
+            "id": 1,
+            "text": "get dressed",
             "interval": 60,
             "started": 1543074326,
             "notified": 1543074426,
             "completed": 1543074526
         },
         {
-            "task": "brush your teeth",
+            "id": 2,
+            "text": "brush your teeth",
             "interval": 60,
             "started": 1543074526,
             "notified": 1543074626,
             "completed": 1543074726
         },
         {
-            "task": "put on your boots, coat, and hat",
+            "id": 3,
+            "text": "put on your boots, coat, and hat",
             "interval": 60,
             "started": 1543074826,
             "notified": 1543074926,
@@ -139,79 +148,84 @@ Templates will be stored in a ConfigMap and are like an array of chore data with
 
 Example:
 
+We're not bothering with the id's as they'll be added based on node/position
+
 ```json
 [
     {
-        "chore": "get ready for school",
+        "label": "Get ready for school and before care",
+        "text": "get ready for school",
         "tasks": [
             {
-                "task": "get out of bed",
+                "text": "get out of bed",
                 "interval": 15
             },
             {
-                "task": "get dressed",
+                "text": "get dressed",
                 "interval": 60
             },
             {
-                "task": "brush your teeth",
+                "text": "brush your teeth",
                 "interval": 60
             },
             {
-                "task": "put on your boots, coat, and hat",
+                "text": "put on your boots, coat, and hat",
                 "interval": 60
             }
         ]
     },
     {
-        "chore": "clean your room",
+        "label": "Joran's list for cleaning his room",
+        "text": "clean your room",
         "tasks": [
             {
-                "task": "put your blankets and pillows on the bed",
+                "text": "put your blankets and pillows on the bed",
                 "interval": 60
             },
             {
-                "task": "put your dirty clothes in the hamper",
+                "text": "put your dirty clothes in the hamper",
                 "interval": 60
             },
             {
-                "task": "put away your books",
+                "text": "put away your books",
                 "interval": 60
             },
             {
-                "task": "put away your toys",
+                "text": "put away your toys",
                 "interval": 60
             },
             {
-                "task": "throw away the trash",
+                "text": "throw away the trash",
                 "interval": 60
             },
             {
-                "task": "sweep the floor",
+                "text": "sweep the floor",
                 "interval": 120
             },
             {
-                "task": "make the bed",
+                "text": "make the bed",
                 "interval": 60
             }
         ]
     },
     {
-        "chore": "get ready for bed",
+        "label": "Both kids bed time routine",
+        "text": "get ready for bed",
         "tasks": [
             {
-                "task": "put on pajamas",
+                "text": "put on pajamas",
                 "interval": 60
             },
             {
-                "task": "brush your teeth",
+                "text": "brush your teeth",
                 "interval": 60
             },
             {
-                "task": "read a story",
+                "text": "read a story",
                 "interval": 300
             },
             {
-                "task": "get in bed",
+                "text": "get in bed",
                 "interval": 15
             }
         ]
