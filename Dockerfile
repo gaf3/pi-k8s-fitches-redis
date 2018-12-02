@@ -1,4 +1,5 @@
-FROM arm32v6/alpine:3.8
+ARG BASE
+FROM ${BASE}
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN addgroup -S redis && adduser -S -G redis redis
