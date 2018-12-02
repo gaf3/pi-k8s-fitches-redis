@@ -12,6 +12,8 @@ else
 BASE=alpine:3.8
 endif
 
+.PHONY: build shell run push create update delete create-dev update-dev delete-dev
+
 build:
 	docker build . --build-arg BASE=$(BASE) -t $(ACCOUNT)/$(IMAGE):$(TAG)
 
