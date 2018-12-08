@@ -57,17 +57,27 @@ JSON object:
 - person - Who's reponsible for the chore
 - node - The node on which the event happened
 - language - The language to use
-- started - Time it started
-- notified - Time last notified (start, complete)
-- completed - Time it completed (non existement if incomplete)
+- start - Time it started
+- delay - Delay to start reminding (in secs)
+- interval - Interval in sends to remind (in sec)
+- notified - Time last notified (start, end)
+- end - Time it was completd or skipped etc
+- task - The current task id
 - tasks - array
   - id - The id to access the task (index for now)
   - text - The text of the task
-  - interval - Interval in sends to remind
-  - started - Time started
+  - status - The status of the task:
+    - pending
+    - active
+    - paused
+    - skipped
+    - completed
+  - delay - Delay to start reminding (in secs)
+  - interval - Interval in sends to remind (in secs)
+  - start - Time started
     - If non existent, no reminder
   - notified - Time last notified (start, reminder, complete)
-  - completed - Time it completed (non existement if incomplete)
+  - end - Time it completed (non existement if incomplete)
 
 Example:
 
@@ -79,40 +89,41 @@ Example:
     "person": "Azalea",
     "node": "pi-k8s-azalea",
     "language": "en",
-    "started": 1543074126,
-    "completed": 1543075126,
+    "start": 1543074126,
+    "end": 1543075126,
+    "task": 3,
     "tasks": [
         {
             "id": 0,
             "text": "get out of bed",
             "interval": 15,
-            "started": 1543074126,
+            "start": 1543074126,
             "notified": 1543074226,
-            "completed": 1543074226
+            "end": 1543074226
         },
         {
             "id": 1,
             "text": "get dressed",
             "interval": 60,
-            "started": 1543074326,
+            "start": 1543074326,
             "notified": 1543074426,
-            "completed": 1543074526
+            "end": 1543074526
         },
         {
             "id": 2,
             "text": "brush your teeth",
             "interval": 60,
-            "started": 1543074526,
+            "start": 1543074526,
             "notified": 1543074626,
-            "completed": 1543074726
+            "end": 1543074726
         },
         {
             "id": 3,
             "text": "put on your boots, coat, and hat",
             "interval": 60,
-            "started": 1543074826,
+            "start": 1543074826,
             "notified": 1543074926,
-            "completed": 1543075126
+            "end": 1543075126
         }
     ]
 }
@@ -121,6 +132,12 @@ Example:
 Chores and tasks are phrased this way to work with the text to speech.  When the chore starts it'll say `"{name}, time to {chore}"`.
 
 Then for each task, it'll say `"{name}, please {task}"` until done and then say `"{name}, you did {task} in {minutes} minute(s), {seconds} second(s)"`
+
+If a task is skipped, it'll say `"{name}, you do not need to {task}"`
+
+If a task is paused, it'll say `"{name}, you do not need to {task} yet"`
+
+If a task is resumed, it'll say `"{name}, please again {task}"`
 
 Then in the end it'll day `"{name}, thank you. You did {chore} in {minutes} minuites and {seconds} seconds"`.
 
@@ -144,7 +161,7 @@ If everything (internal) interacts with Redis directly and Redis goes down, mess
 
 If everything (internal) interacts withe API and the API goes down, daemons will be pulling messages but unable to process and we'll have lost state. 
 
-Templates will be stored in a ConfigMap and are like an array of chore data without all the specifics:
+Templates will be stored in a ConfigMap as yaml and not requiring all the specifics:
 
 Example:
 
@@ -177,6 +194,8 @@ We're not bothering with the id's as they'll be added based on node/position
     {
         "label": "Joran's list for cleaning his room",
         "text": "clean your room",
+        "person": "Joran",
+        "node": "pi-k8s-joran",
         "tasks": [
             {
                 "text": "put your blankets and pillows on the bed",
