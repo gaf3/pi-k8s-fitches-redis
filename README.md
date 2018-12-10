@@ -59,25 +59,22 @@ JSON object:
 - language - The language to use
 - start - Time it started
 - delay - Delay to start reminding (in secs)
-- interval - Interval in sends to remind (in sec)
-- notified - Time last notified (start, end)
 - end - Time it was completd or skipped etc
-- task - The current task id
 - tasks - array
   - id - The id to access the task (index for now)
   - text - The text of the task
-  - status - The status of the task:
-    - pending
-    - active
-    - paused
-    - skipped
-    - completed
+  - paused - If true, task is paused
+  - skipped - If true, task is skipped
   - delay - Delay to start reminding (in secs)
   - interval - Interval in sends to remind (in secs)
   - start - Time started
     - If non existent, no reminder
   - notified - Time last notified (start, reminder, complete)
   - end - Time it completed (non existement if incomplete)
+
+  If there's an interval in the chore, all intervals in the tasks will be ignored. 
+
+  If there's no intercal in the task, it cannot be used with the next button. 
 
 Example:
 
