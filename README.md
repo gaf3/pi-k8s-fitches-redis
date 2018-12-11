@@ -164,87 +164,18 @@ Example:
 
 We're not bothering with the id's as they'll be added based on node/position
 
-```json
-[
-    {
-        "label": "Get ready for school and before care",
-        "text": "get ready for school",
-        "tasks": [
-            {
-                "text": "get out of bed",
-                "interval": 15
-            },
-            {
-                "text": "get dressed",
-                "interval": 60
-            },
-            {
-                "text": "brush your teeth",
-                "interval": 60
-            },
-            {
-                "text": "put on your boots, coat, and hat",
-                "interval": 60
-            }
-        ]
-    },
-    {
-        "label": "Joran's list for cleaning his room",
-        "text": "clean your room",
-        "person": "Joran",
-        "node": "pi-k8s-joran",
-        "tasks": [
-            {
-                "text": "put your blankets and pillows on the bed",
-                "interval": 60
-            },
-            {
-                "text": "put your dirty clothes in the hamper",
-                "interval": 60
-            },
-            {
-                "text": "put away your books",
-                "interval": 60
-            },
-            {
-                "text": "put away your toys",
-                "interval": 60
-            },
-            {
-                "text": "throw away the trash",
-                "interval": 60
-            },
-            {
-                "text": "sweep the floor",
-                "interval": 120
-            },
-            {
-                "text": "make the bed",
-                "interval": 60
-            }
-        ]
-    },
-    {
-        "label": "Both kids bed time routine",
-        "text": "get ready for bed",
-        "tasks": [
-            {
-                "text": "put on pajamas",
-                "interval": 60
-            },
-            {
-                "text": "brush your teeth",
-                "interval": 60
-            },
-            {
-                "text": "read a story",
-                "interval": 300
-            },
-            {
-                "text": "get in bed",
-                "interval": 15
-            }
-        ]
-    }
-]
+```yaml
+label: Get Ready for School
+text: get ready for school
+language: en-au
+tasks:
+- text: get out of bed
+  interval: 15
+- text: get dressed
+  interval: 60
+- text: brush your teeth
+  delay: 60
+  interval: 60
+- text: put on your boots, coat, and hat
+  interval: 60
 ```
