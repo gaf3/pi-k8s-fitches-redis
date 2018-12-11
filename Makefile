@@ -21,7 +21,7 @@ shell: build
 	docker run -it $(ACCOUNT)/$(IMAGE):$(TAG) sh
 
 run: build
-	docker run -it --rm -p $(PORT):$(PORT) -h $(IMAGE) $(ACCOUNT)/$(IMAGE):$(TAG)
+	docker run -it --rm -p 127.0.0.1:$(PORT):$(PORT) -h $(IMAGE) $(ACCOUNT)/$(IMAGE):$(TAG)
 
 push: build
 	docker push $(ACCOUNT)/$(IMAGE):$(TAG)
