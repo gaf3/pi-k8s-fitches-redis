@@ -1,4 +1,4 @@
-# pi-k8s-fitches-redis
+# pi-k8s-fitches/redis
 
 # Data Stuctures
 
